@@ -553,4 +553,4 @@ let-env config = {
 }
 
 let-env STARSHIP_CONFIG = ($nu.config-path | path dirname | path join starship.toml)
-source c:/p/nuscripts/starship.nu
+source starship.nu
