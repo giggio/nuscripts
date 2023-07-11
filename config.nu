@@ -551,3 +551,6 @@ let-env config = {
     }
   ]
 }
+
+let-env STARSHIP_CONFIG = c:/p/nuscripts/starship.toml
+source c:/p/nuscripts/starship.nu
