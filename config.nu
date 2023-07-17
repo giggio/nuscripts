@@ -555,7 +555,4 @@ let-env config = {
 let-env STARSHIP_CONFIG = ($nu.config-path | path dirname | path join starship.toml)
 source starship.nu
 source alias.nu
-# if not (which zoxide | is-empty) { # not working
-#   source zoxide.nu
-# }
 source zoxide.nu

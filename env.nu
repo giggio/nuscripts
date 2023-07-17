@@ -35,3 +35,11 @@ let-env NU_PLUGIN_DIRS = [
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+
+if ($nu.os-info.family == linux) {
+  let-env RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep docker /proc/1/cgroup -qa err> /dev/null | complete).exit_code == 0)
+  let-env WSL = (grep microsoft /proc/version -q | complete).exit_code == 0
+} else {
+  let-env RUNNING_IN_CONTAINER = false
+  let-env WSL = false
+}
