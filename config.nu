@@ -557,3 +557,4 @@ source starship.nu
 source alias.nu
 source zoxide.nu
 source completions.nu
+source config-wsl.nu
