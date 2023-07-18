@@ -18,6 +18,16 @@ Install [carapace-bin](https://github.com/rsteube/carapace-bin) and delete
 `scripts/dynamic/carapace-init.nu`. It will be automatically recreated
 with the necessary code from carapace-bin.
 
+## Shell prompt
+
+Install [Starship](https://starship.rs).
+
+## Other tools
+
+Install:
+
+* [Zoxide](https://github.com/ajeetdsouza/zoxide)
+
 ## Contributing
 
 Questions, comments, bug reports, and pull requests are all welcome.  Submit them at

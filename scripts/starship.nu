@@ -1,3 +1,6 @@
+if (which starship | is-empty) {
+  return
+}
 let-env STARSHIP_SHELL = "nu"
 let-env STARSHIP_SESSION_KEY = (random chars -l 16)
 let-env PROMPT_MULTILINE_INDICATOR = (^starship prompt --continuation)
