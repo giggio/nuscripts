@@ -46,3 +46,10 @@ if ($nu.os-info.family == linux) {
   let-env RUNNING_IN_CONTAINER = false
   let-env WSL = false
 }
+
+if ($env | get -i EDITOR) == null {
+  let-env EDITOR = vim
+}
+if ($env | get -i VISUAL) == null {
+  let-env VISUAL = vim
+}
