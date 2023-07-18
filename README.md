@@ -12,6 +12,12 @@ git clone --recursive https://github.com/giggio/nuscripts.git <your directory>
 
 Set a symlink from `config.nu` and `env.nu` to the ones in your directory.
 
+## Completions
+
+Install [carapace-bin](https://github.com/rsteube/carapace-bin) and delete
+`scripts/dynamic/carapace-init.nu`. It will be automatically recreated
+with the necessary code from carapace-bin.
+
 ## Contributing
 
 Questions, comments, bug reports, and pull requests are all welcome.  Submit them at

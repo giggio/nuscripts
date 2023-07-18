@@ -556,3 +556,4 @@ let-env STARSHIP_CONFIG = ($nu.config-path | path dirname | path join starship.t
 source starship.nu
 source alias.nu
 source zoxide.nu
+source completions.nu

@@ -20,17 +20,20 @@ let-env ENV_CONVERSIONS = {
 # Directories to search for scripts when calling source or use
 #
 # By default, <nushell-config-dir>/scripts is added
+let configPath = ($nu.config-path | path dirname)
+let scriptsPath = ($configPath | path join scripts)
 let-env NU_LIB_DIRS = [
-    ($nu.default-config-dir | path join 'scripts')
-    ($nu.config-path | path dirname | path join 'scripts')
+    ($nu.default-config-dir | path join scripts)
+    $scriptsPath
+    ($configPath | path join scripts | path join dynamic)
 ]
 
 # Directories to search for plugin binaries when calling register
 #
 # By default, <nushell-config-dir>/plugins is added
 let-env NU_PLUGIN_DIRS = [
-    ($nu.default-config-dir | path join 'plugins')
-    ($nu.config-path | path dirname | path join 'plugins')
+    ($nu.default-config-dir | path join plugins)
+    ($configPath | path join plugins)
 ]
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
@@ -43,3 +46,5 @@ if ($nu.os-info.family == linux) {
   let-env RUNNING_IN_CONTAINER = false
   let-env WSL = false
 }
+
+nu ($scriptsPath | path join completions-setup.nu)
