@@ -46,5 +46,3 @@ if ($nu.os-info.family == linux) {
   let-env RUNNING_IN_CONTAINER = false
   let-env WSL = false
 }
-
-nu ($scriptsPath | path join completions-setup.nu)
