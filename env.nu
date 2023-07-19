@@ -36,8 +36,9 @@ let-env NU_PLUGIN_DIRS = [
     ($configPath | path join plugins)
 ]
 
-# To add entries to PATH (on Windows you might use Path), you can use the following pattern:
-# let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+if ($nu.os-info.family == unix) {
+  let-env PATH = ($env.PATH | split row (char esep) | prepend $"($env.HOME)/.cargo/bin")
+}
 
 if ($nu.os-info.family == unix) {
   let-env RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep docker /proc/1/cgroup -qa err> /dev/null | complete).exit_code == 0)
