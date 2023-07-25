@@ -35,9 +35,21 @@ let-env NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join plugins)
     ($configPath | path join plugins)
 ]
+let binDir = ($env.HOME | path join bin)
+if ($binDir | path type) == dir {
+  let-env PATH = ($env.PATH | split row (char esep) | prepend $binDir)
+}
 
 if ($nu.os-info.family == unix) {
   let-env PATH = ($env.PATH | split row (char esep) | prepend $"($env.HOME)/.cargo/bin")
+}
+
+if ($nu.os-info.family == unix) {
+  let N_PREFIX = ($env.HOME | path join .n)
+  if ($N_PREFIX | path type) == dir {
+    let-env PATH = ($env.PATH | split row (char esep) | prepend ($N_PREFIX | path join bin))
+    let-env N_PREFIX = $N_PREFIX
+  }
 }
 
 if ($nu.os-info.family == unix) {
