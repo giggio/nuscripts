@@ -27,7 +27,7 @@ let-env NU_LIB_DIRS = [
     $scriptsPath
     ($configPath | path join scripts | path join dynamic)
 ]
-def AddToPath [newPath] {
+def-env AddToPath [newPath] {
   if $nu.os-info.family == windows {
     let-env Path = ($env.Path | split row (char esep) | prepend $newPath)
   } else {
