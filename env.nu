@@ -27,6 +27,13 @@ let-env NU_LIB_DIRS = [
     $scriptsPath
     ($configPath | path join scripts | path join dynamic)
 ]
+def AddToPath [newPath] {
+  if $nu.os-info.family == windows {
+    let-env Path = ($env.Path | split row (char esep) | prepend $newPath)
+  } else {
+    let-env PATH = ($env.PATH | split row (char esep) | prepend $newPath)
+  }
+}
 
 # Directories to search for plugin binaries when calling register
 #
@@ -41,7 +48,7 @@ if $nu.os-info.family == windows and (($env | get -i HOME) == null) {
 }
 let binDir = ($env.HOME | path join bin)
 if ($binDir | path type) == dir {
-  let-env PATH = ($env.PATH | split row (char esep) | prepend $binDir)
+  AddToPath $binDir
 }
 
 if ($nu.os-info.family == unix) {
