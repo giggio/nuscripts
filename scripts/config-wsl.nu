@@ -1,7 +1,7 @@
-if ($env | get -i WSL | default false) {
+if not ($env | get -i WSL | default false) {
   return
 }
-let bashscripts = ($env.FILE_PWD | path join ... bashscripts | path expand)
+let bashscripts = ($nu.config-path | path dirname | path join .. bashscripts | path expand)
 if ($bashscripts | path exists) {
   let bashrcwsl = ($bashscripts | path join "bashrc-wsl.bash")
   if ($bashrcwsl | path exists) {
