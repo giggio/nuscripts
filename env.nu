@@ -35,6 +35,10 @@ let-env NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join plugins)
     ($configPath | path join plugins)
 ]
+
+if $nu.os-info.family == windows and (($env | get -i HOME) == null) {
+  let-env HOME = $env.USERPROFILE
+}
 let binDir = ($env.HOME | path join bin)
 if ($binDir | path type) == dir {
   let-env PATH = ($env.PATH | split row (char esep) | prepend $binDir)
