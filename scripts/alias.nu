@@ -36,12 +36,21 @@ alias toyaml = bat --language yaml
 #   alias git = hub
 # }
 alias git = hub
+# alias nn = do {$env.HOME | path join bin n}
+def nn [...args] {
+  # n is already a nushell custom command, so we have this "alias"/custom command.
+  # alias nvm = ($env.HOME | path join bin n) # can't alias subexpressions. See: https://github.com/nushell/nushell/issues/9732
+  # also, flags don't work. See: https://github.com/nushell/nushell/issues/3276
+  let n = ($env.HOME | path join bin n)
+  ^$n $args
+}
 
 def pushsync [] {
   git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)
 }
 
 def add [...args] {
+  # flags don't work. See: https://github.com/nushell/nushell/issues/3276
   if ($args | is-empty) {
     git add -A :/
   } else {
