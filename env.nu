@@ -2,6 +2,8 @@
 #
 # version = 0.80.1
 
+use std
+
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
 # - converted from a value back to a string when running external commands (to_string)
@@ -27,13 +29,6 @@ let-env NU_LIB_DIRS = [
     $scriptsPath
     ($configPath | path join scripts | path join dynamic)
 ]
-def-env AddToPath [newPath] {
-  if $nu.os-info.family == windows {
-    let-env Path = ($env.Path | split row (char esep) | prepend $newPath)
-  } else {
-    let-env PATH = ($env.PATH | split row (char esep) | prepend $newPath)
-  }
-}
 
 # Directories to search for plugin binaries when calling register
 #
@@ -48,7 +43,7 @@ if $nu.os-info.family == windows and (($env | get -i HOME) == null) {
 }
 let binDir = ($env.HOME | path join bin)
 if ($binDir | path type) == dir {
-  AddToPath $binDir
+  std path add $binDir
 }
 
 if ($nu.os-info.family == unix) {
