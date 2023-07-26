@@ -27,4 +27,4 @@ $current.completions.external = ($current.completions.external
     | default true enable
     | default $alias_completer completer)
 
-let-env config = $current
+$env.config = $current
