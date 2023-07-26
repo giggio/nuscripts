@@ -84,10 +84,8 @@ $env.NU_PLUGIN_DIRS = [
 # --
 # My customizations start here:
 
-let configPath = ($nu.config-path | path dirname)
-let scriptsPath = ($configPath | path join scripts)
+let scriptsPath = $nu.config-path | path dirname | path join scripts
 $env.NU_LIB_DIRS = [
-  ($nu.default-config-dir | path join scripts)
   $scriptsPath
-  ($configPath | path join scripts | path join dynamic)
+  ($scriptsPath | path join dynamic)
 ]

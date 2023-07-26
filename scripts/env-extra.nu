@@ -1,22 +1,16 @@
 use std
 
-let configPath = ($nu.config-path | path dirname)
-let scriptsPath = ($configPath | path join scripts)
-$env.NU_LIB_DIRS = [
-  ($nu.default-config-dir | path join scripts)
-  $scriptsPath
-  ($configPath | path join scripts | path join dynamic)
-]
+let configPath = $nu.config-path | path dirname
+let scriptsPath = $configPath | path join scripts
 
 $env.NU_PLUGIN_DIRS = [
-  ($nu.default-config-dir | path join plugins)
   ($configPath | path join plugins)
 ]
 
 if $nu.os-info.family == windows and (($env | get -i HOME) == null) {
   $env.HOME = $env.USERPROFILE
 }
-let binDir = ($env.HOME | path join bin)
+let binDir = $env.HOME | path join bin
 if ($binDir | path type) == dir {
   std path add $binDir
 }
@@ -26,7 +20,7 @@ if ($nu.os-info.family == unix) {
 }
 
 if ($nu.os-info.family == unix) {
-  let N_PREFIX = ($env.HOME | path join .n)
+  let N_PREFIX = $env.HOME | path join .n
   if ($N_PREFIX | path type) == dir {
     $env.PATH = ($env.PATH | split row (char esep) | prepend ($N_PREFIX | path join bin))
     $env.N_PREFIX = $N_PREFIX

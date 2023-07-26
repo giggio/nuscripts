@@ -18,7 +18,7 @@ $env.PROMPT_COMMAND = { ||
 }
 
 # Whether we have config items
-let has_config_items = (not ($env | get -i config | is-empty))
+let has_config_items = not ($env | get -i config | is-empty)
 
 $env.config = if $has_config_items {
     $env.config | upsert render_right_prompt_on_last_line true
