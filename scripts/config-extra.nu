@@ -11,3 +11,4 @@ source alias.nu
 source zoxide.nu
 source completions.nu
 source config-wsl.nu
+source alias-wsl.nu
