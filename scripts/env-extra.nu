@@ -41,3 +41,7 @@ if ($env | get -i EDITOR) == null {
 if ($env | get -i VISUAL) == null {
   $env.VISUAL = vim
 }
+
+if ('~/.kube' | path exists) {
+  $env.KUBECONFIG = (ls ~/.kube | where type == file and name !~ '.*\.ba(k|ckup)' and name != kubectx | sort | get name | str join (char esep))
+}
