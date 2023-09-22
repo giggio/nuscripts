@@ -45,3 +45,20 @@ if ($env | get -i VISUAL) == null {
 if ('~/.kube' | path exists) {
   $env.KUBECONFIG = (ls ~/.kube | where type == file and name !~ '.*\.ba(k|ckup)' and name != kubectx | sort | get name | str join (char esep))
 }
+
+if ('~/.fzf' | path exists) {
+  $env.PATH = ($env.PATH | split row (char esep) | prepend ~/.fzf/bin)
+
+  # todo: add completions and key bindings, but currently there is no scripts for Nushell. Something like:
+  # if ($nu.is-interactive) {
+  #   source ~/.fzf/shell/completion.nu 2> /dev/null
+  #   source ~/.fzf/shell/key-bindings.nu
+  # }
+
+  if not (which fd | is-empty) {
+    $env.FZF_DEFAULT_COMMAND = "fd --type file --color=always --exclude .git"
+    $env.FZF_DEFAULT_OPTS = "--ansi"
+    $env.FZF_CTRL_T_COMMAND = $env.FZF_DEFAULT_COMMAND
+  }
+
+}
