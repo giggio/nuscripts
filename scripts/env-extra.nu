@@ -7,8 +7,9 @@ $env.NU_PLUGIN_DIRS = [
   ($configPath | path join plugins)
 ]
 
-source env-extra-windows.nu
+source functions.nu
 source env-extra-linux.nu
+source env-extra-windows.nu
 
 $env.binDir = ($env.HOME | path join bin)
 if ($env.binDir | path type) == dir {
