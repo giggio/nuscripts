@@ -7,13 +7,8 @@ $env.NU_PLUGIN_DIRS = [
   ($configPath | path join plugins)
 ]
 
-if $nu.os-info.family == windows {
-  source env-extra-windows.nu
-}
-
-if ($nu.os-info.family == unix) {
-  source env-extra-linux.nu
-}
+source env-extra-windows.nu
+source env-extra-linux.nu
 
 $env.binDir = ($env.HOME | path join bin)
 if ($env.binDir | path type) == dir {
@@ -49,7 +44,10 @@ if ('~/.fzf' | path exists) {
 }
 
 if not (which dotnet | is-empty) {
-  std path add $"($env.HOME)/.dotnet/tools"
+  let dotnetToolsPath = ($env.HOME | path join .dotnet tools)
+  if (path get | find $dotnetToolsPath | is-empty) {
+    std path add $dotnetToolsPath
+  }
 }
 
 if not (which sccache | is-empty) {

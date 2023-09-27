@@ -1,5 +1,13 @@
+if $nu.os-info.family != unix {
+  return
+}
+
 $env.RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep docker /proc/1/cgroup -qa err> /dev/null | complete).exit_code == 0)
 $env.WSL = (grep microsoft /proc/version -q | complete).exit_code == 0
+
+def "path get" [] {
+  $env.PATH
+}
 
 std path add $"($env.HOME)/.local/bin"
 

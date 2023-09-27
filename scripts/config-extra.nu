@@ -11,9 +11,11 @@ $env.config.cursor_shape.vi_normal = block
 $env.config.buffer_editor = vim
 $env.config.edit_mode = vi
 $env.config.shell_integration = true
+
+source config-extra-windows.nu
+source config-extra-linux.nu
+
 source starship.nu
 source alias.nu
 source zoxide.nu
 source completions.nu
-source config-wsl.nu
-source alias-wsl.nu
