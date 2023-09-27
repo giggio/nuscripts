@@ -25,7 +25,7 @@ if ($env | get -i VISUAL) == null {
 }
 
 if ('~/.kube' | path exists) {
-  $env.KUBECONFIG = (ls ~/.kube | where type == file and name !~ '.*\.ba(k|ckup)' and name != kubectx | sort | get name | str join (char esep))
+  $env.KUBECONFIG = (ls ~/.kube | where type == file and name !~ '.*\.ba(k|ckup)' and name !~ kubectx | sort | get name | str join (char esep))
 }
 
 if ('~/.fzf' | path exists) {
