@@ -14,8 +14,7 @@ alias tag = git tag
 alias up = git up
 alias sync = git sync
 alias ccat = pygmentize -g -O style=vs -f console16m
-# alias ll = ls -la
-alias ll = eza --long --group --all --all --group-directories-first
+alias ll = if (which eza | is-empty) { ls -la } else { eza --long --group --all --all --group-directories-first }
 alias l = ls
 alias cls = clear
 alias istio = istioctl
