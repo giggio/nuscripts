@@ -20,4 +20,5 @@ source alias.nu
 source zoxide.nu
 source completions.nu
 # to create from bash version: sed -E 's/alias ([a-z]*)='(.*)'/alias \1 = \2/' ./lib/kubectl-aliases/.kubectl_aliases | save scripts/dynamic/kubectl_aliases.nu
-source ./kubectl-aliases/.kubectl_aliases.nu
+source source-kubectl_aliases.nu
+source source-kubecolor_aliases.nu
