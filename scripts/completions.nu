@@ -7,10 +7,10 @@ let carapace_completer = {|spans|
   carapace $spans.0 nushell $spans | from json
 }
 
+let aliasedCommands = scope aliases | select name expansion |  insert command { $in.expansion | parse --regex '(?P<command>\w+)(?P<rest>.*)' | get 0 | get command } | select name command
 let alias_completer = { |spans|
   mut $completions = (do $carapace_completer $spans)
   if ($completions | is-empty) {
-    let aliasedCommands = scope aliases | select name expansion |  insert command { $in.expansion | parse --regex '(?P<command>\w+)(?P<rest>.*)' | get 0 | get command } | select name command
     let unaliasedCommand = $aliasedCommands | where name == $spans.0 | get -i 0 | get -i command
     if ($unaliasedCommand != null) {
       mut mutSpans = $spans

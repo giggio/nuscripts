@@ -5,7 +5,10 @@ let bashscripts = ($nu.config-path | path dirname | path join .. bashscripts | p
 if ($bashscripts | path exists) {
   let bashrcwsl = ($bashscripts | path join "bashrc-wsl.bash")
   if ($bashrcwsl | path exists) {
-    ^$bashrcwsl
+    do {
+      $env.PATH = $env.PATH_WITH_WINDOWS
+      ^$bashrcwsl
+    }
   }
 }
 let SSH_AUTH_SOCK = '/tmp/ssh_agent_socket'

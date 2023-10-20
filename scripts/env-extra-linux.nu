@@ -7,6 +7,8 @@ source functions-linux.nu
 $env.RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep docker /proc/1/cgroup -qa err> /dev/null | complete).exit_code == 0)
 $env.WSL = (grep microsoft /proc/version -q | complete).exit_code == 0
 
+source env-wsl.nu
+
 std path add $"($env.HOME)/.local/bin"
 
 if ($"($env.HOME)/.cargo/bin" | path type) == dir {
