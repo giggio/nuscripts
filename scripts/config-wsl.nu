@@ -11,7 +11,7 @@ if ($bashscripts | path exists) {
     }
   }
 }
-let SSH_AUTH_SOCK = '/tmp/ssh_agent_socket'
+let SSH_AUTH_SOCK = $env.XDG_RUNTIME_DIR | path join 'gnupg/ssh.sock'
 $env.SSH_AUTH_SOCK = if ($SSH_AUTH_SOCK | path exists) {
   $SSH_AUTH_SOCK
 }
