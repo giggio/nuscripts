@@ -1,6 +1,6 @@
 # Nushell Environment Config File
 #
-# version = "0.86.0"
+# version = "0.88.1"
 
 def create_left_prompt [] {
     let home =  $nu.home-path
@@ -86,14 +86,14 @@ $env.ENV_CONVERSIONS = {
 }
 
 # Directories to search for scripts when calling source or use
+# The default for this is $nu.default-config-dir/scripts
 $env.NU_LIB_DIRS = [
-    # FIXME: This default is not implemented in rust code as of 2023-09-06.
     ($nu.default-config-dir | path join 'scripts') # add <nushell-config-dir>/scripts
 ]
 
 # Directories to search for plugin binaries when calling register
+# The default for this is $nu.default-config-dir/plugins
 $env.NU_PLUGIN_DIRS = [
-    # FIXME: This default is not implemented in rust code as of 2023-09-06.
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
@@ -102,6 +102,8 @@ $env.NU_PLUGIN_DIRS = [
 
 # --
 # My customizations start here:
+
+# to update the above code go to (adapt the tag): https://github.com/nushell/nushell/blob/0.88.1/crates/nu-utils/src/sample_config/default_env.nu
 
 let scripts_path = $nu.config-path | path dirname | path join scripts
 $env.NU_LIB_DIRS = [
