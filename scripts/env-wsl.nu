@@ -24,7 +24,6 @@ def find_in_win_path [exec] {
 
 def remove_win_from_path [] {
   let drive_mounts = (ls /mnt | where name =~ \/mnt\/[a-z]$ | get name)
-  $env.PATH | describe
   mut path = ($env.PATH | split row (char esep))
   for drive_mount in $drive_mounts {
     $path = ($path | where ($it !~ $drive_mount))
