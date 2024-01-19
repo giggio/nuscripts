@@ -3,7 +3,7 @@ if not ($env | get -i WSL | default false) {
 }
 
 alias explorer = ^(find_in_win_path explorer.exe)
-alias cmd = ^(find_in_win_path cmd.exe)
+alias cmd = ^(cd /mnt/c;$env.COMSPEC)
 alias powershell = ^(find_in_win_path powershell.exe)
 alias clip = ^(find_in_win_path clip.exe)
 alias notepad = ^(find_in_win_path notepad.exe)
@@ -14,6 +14,5 @@ alias code = ^(find_in_win_path code)
 alias code-insiders = ^(find_in_win_path code-insiders)
 
 def ver [] {
-  cd /mnt/c
-  cmd.exe /c ver
+  cmd /c ver
 }
