@@ -1,3 +1,4 @@
-if $nu.os-info.family != unix {
-  return
+# Get the current path.
+export def --env "path get" [] {
+  $env.PATH
 }

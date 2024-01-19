@@ -8,8 +8,7 @@ $env.NU_PLUGIN_DIRS = [
 ]
 
 source functions.nu
-source env-extra-linux.nu
-source env-extra-windows.nu
+source (if $nu.os-info.family == windows { 'env-extra-windows.nu' } else { 'env-extra-linux.nu' })
 
 $env.binDir = ($env.HOME | path join bin)
 if ($env.binDir | path type) == dir {

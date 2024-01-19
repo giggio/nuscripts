@@ -1,6 +1,7 @@
 if not ($env | get -i WSL | default false) {
   return
 }
+
 alias explorer = ^(find_in_win_path explorer.exe)
 alias cmd = ^(find_in_win_path cmd.exe)
 alias powershell = ^(find_in_win_path powershell.exe)

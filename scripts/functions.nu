@@ -1,4 +1,1 @@
-export def --env "path get" [] {
-  let path_name = if "PATH" in $env { "PATH" } else { "Path" }
-  $env | get $path_name
-}
+source (if $nu.os-info.family == windows { 'functions-windows.nu' } else { 'functions-linux.nu' })

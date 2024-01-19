@@ -1,3 +1,4 @@
-if $nu.os-info.family != windows {
-  return
+# Get the current path.
+export def --env "path get" [] {
+  $env.Path
 }

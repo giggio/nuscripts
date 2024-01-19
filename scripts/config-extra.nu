@@ -13,8 +13,7 @@ $env.config.edit_mode = vi
 $env.config.shell_integration = true
 $env.config.highlight_resolved_externals = true
 
-source config-extra-windows.nu
-source config-extra-linux.nu
+source (if $nu.os-info.family == unix { 'config-extra-linux.nu' } else { 'config-extra-windows.nu' })
 
 source starship.nu
 source alias.nu
