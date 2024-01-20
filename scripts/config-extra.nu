@@ -24,3 +24,4 @@ source completions.nu
 # todo: sourcing of kubectl aliases temporarily disabled, as nushell will always parse the file, which is adding 1 second to the shell startup time
 # source source-kubectl_aliases.nu
 source source-kubecolor_aliases.nu
+source github-copilot-cli.nu
