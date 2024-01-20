@@ -1,5 +1,5 @@
 # Searches the history.
-def "history search" [
+def 'history search' [
   str: string = '' # search string
   --cwd(-c) # Filter search result by directory
   --exit(-e): int = 0 # Filter search result by exit code
@@ -30,5 +30,20 @@ def 'history delete' [
     }
     open $nu.history-path | query db $"delete from history where id = ($id)"
   }
+  null
+}
+
+# todo: can't add to history in nushell, see: https://github.com/nushell/nushell/issues/11588
+
+# Inserts a history entry.
+def 'history insert' [
+  command: string # the command to insert
+  --duration(-d): int = 0 # the duration of the command
+  --exit_status(-e): int = 0 # the exit status of the command
+  ] {
+  let now = (date now | into int)
+  let diff = ($now | into string | str length) - 13 # 13 is the length of the timestamp in the database
+  let adjusted_now = ($now / (10 ** $diff)) | math round
+  open $nu.history-path | query db $"INSERT INTO history \(command_line, start_timestamp, session_id, hostname, cwd, duration_ms, exit_status) VALUES \('($command)', ($adjusted_now), (history session), '((sys).host.hostname)', '(pwd)', ($duration), ($exit_status))"
   null
 }
