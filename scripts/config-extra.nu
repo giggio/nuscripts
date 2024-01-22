@@ -25,3 +25,4 @@ source completions.nu
 # source source-kubectl_aliases.nu
 source source-kubecolor_aliases.nu
 source github-copilot-cli.nu
+source navi.nu
