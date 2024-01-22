@@ -1,6 +1,6 @@
 def copilot_helper [command, ...args] {
   use std log
-  let TMPFILE = mktemp --suffix .nu
+  let TMPFILE = mktemp --tmpdir --suffix .nu
   try {
     github-copilot-cli $command $args --shellout $TMPFILE
     if $env.LAST_EXIT_CODE == 0 {
