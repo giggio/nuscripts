@@ -24,7 +24,8 @@ def _navi_call [] {
 # use dotfiles cheats if it exists
 let cheats_dir = ($nu.config-path | path dirname | path join .. cheats | path expand)
 if ($cheats_dir | path exists) {
-  $env.NAVI_PATH = $"($cheats_dir)/dist/common/(char esep)($cheats_dir)/dist/nushell/(char esep)($cheats_dir)/dist/linux/common/(char esep)($cheats_dir)/dist/linux/nushell/"
+  let os = if $nu.os-info.family == unix { 'linux' } else { 'windows' }
+  $env.NAVI_PATH = $"($cheats_dir)/dist/common/(char esep)($cheats_dir)/dist/nushell/(char esep)($cheats_dir)/dist/($os)/common/(char esep)($cheats_dir)/dist/($os)/nushell/"
 }
 
 $env.config.keybindings = ($env.config.keybindings | append {
