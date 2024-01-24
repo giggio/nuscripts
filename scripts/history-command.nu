@@ -22,7 +22,7 @@ def 'history delete' [
   --last # delete the last entry, ignore the id, if passed
   ] {
   if $last {
-    open $nu.history-path | query db $"delete from history where id = \(select id from \(select id from history order by id desc LIMIT 2) order by id asc LIMIT 1)"
+    open $nu.history-path | query db $"delete from history where id = \(select id from \(select id from history where session_id = (history session) order by id desc LIMIT 2) order by id asc LIMIT 1)"
   } else {
     if $id == 0 {
       echo "You must pass an id or use --last"
