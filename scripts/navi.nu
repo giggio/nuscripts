@@ -2,7 +2,9 @@ if (which navi | is-empty) {
   return
 }
 
-def _navi_widget [] {
+let navi_command = open (navi info config-path) | get -i 'shell' | default { command: null } | get -i command | default 'bash'
+
+def _navi_widget [--run] {
   let input = commandline
   let last_command = ($input | navi fn widget::last_command)
   let result = if ($last_command == "") { navi --print } else { navi --print --query $last_command } | str trim
@@ -13,9 +15,17 @@ def _navi_widget [] {
   let tmpfile = mktemp --tmpdir --suffix .nu
   try {
     $result | save --force $tmpfile
-    history insert $result
-    nu $tmpfile
-    commandline -r ''
+    if $run {
+      print $"Running using '($navi_command)':" $result
+      ^$navi_command $tmpfile
+      history insert $"($navi_command) -c '($result)'"
+      commandline -r ''
+    } else {
+      commandline -r $result
+      # we can't do that, cheats are written in bash:
+      # history insert $result
+      # nu $tmpfile
+    }
   } catch { |e|
     use std log
     log error $"Command failed: ($e)"
@@ -35,6 +45,17 @@ $env.config.keybindings = ($env.config.keybindings | append {
   name: navi
   modifier: control
   keycode: char_g
+  mode: [emacs vi_normal vi_insert]
+  event: {
+    send: ExecuteHostCommand
+    cmd: "_navi_widget --run"
+  }
+})
+
+$env.config.keybindings = ($env.config.keybindings | append {
+  name: navi
+  modifier: control
+  keycode: char_h
   mode: [emacs vi_normal vi_insert]
   event: {
     send: ExecuteHostCommand
