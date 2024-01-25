@@ -18,7 +18,8 @@ alias ccat = pygmentize -g -O style=vs -f console16m
 alias grep = grep --color=auto
 alias fgrep = fgrep --color=auto
 alias egrep = egrep --color=auto
-alias ll = if (which eza | is-empty) { ls -la } else { eza --long --group --all --all --group-directories-first }
+# alias ll = if (which eza | is-empty) { ls -la } else { eza --long --group --all --all --group-directories-first }
+alias ll = eza --long --group --all --all --group-directories-first
 alias l = ls
 alias cls = clear
 alias istio = istioctl
