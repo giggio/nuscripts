@@ -44,6 +44,11 @@ def 'history insert' [
   let now = (date now | into int)
   let diff = ($now | into string | str length) - 13 # 13 is the length of the timestamp in the database
   let adjusted_now = ($now / (10 ** $diff)) | math round
-  open $nu.history-path | query db $"INSERT INTO history \(command_line, start_timestamp, session_id, hostname, cwd, duration_ms, exit_status) VALUES \('($command)', ($adjusted_now), (history session), '((sys).host.hostname)', '(pwd)', ($duration), ($exit_status))"
+  open $nu.history-path | query db $"INSERT INTO history \(command_line, start_timestamp, session_id, hostname, cwd, duration_ms, exit_status) VALUES \('($command | sqlite_escape)', ($adjusted_now), (history session), '((sys).host.hostname | sqlite_escape)', '(pwd | sqlite_escape)', ($duration), ($exit_status))"
   null
+}
+
+def sqlite_escape [] {
+  # todo: remove escaping when fixed: https://github.com/nushell/nushell/issues/11643
+  $in | str replace "'" "''" --all
 }
