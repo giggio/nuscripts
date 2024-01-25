@@ -2,17 +2,20 @@ if (which navi | is-empty) {
   return
 }
 
-def _navi_call [] {
-  let result = navi --print
+def _navi_widget [] {
+  let input = commandline
+  let last_command = ($input | navi fn widget::last_command)
+  let result = if ($last_command == "") { navi --print } else { navi --print --query $last_command } | str trim
+
   if $result == "" {
     return
   }
   let tmpfile = mktemp --tmpdir --suffix .nu
-  print $result
   try {
     $result | save --force $tmpfile
     history insert $result
     nu $tmpfile
+    commandline -r ''
   } catch { |e|
     use std log
     log error $"Command failed: ($e)"
@@ -35,6 +38,6 @@ $env.config.keybindings = ($env.config.keybindings | append {
   mode: [emacs vi_normal vi_insert]
   event: {
     send: ExecuteHostCommand
-    cmd: "_navi_call"
+    cmd: "_navi_widget"
   }
 })
