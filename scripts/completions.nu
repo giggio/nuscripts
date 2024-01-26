@@ -4,7 +4,7 @@ if (which carapace | is-empty) {
 # to update: carapace _carapace nushell | save --force completions.nu
 
 let carapace_completer = {|spans|
-  carapace $spans.0 nushell $spans | from json
+  carapace $spans.0 nushell ...$spans | from json
 }
 
 let aliasedCommands = scope aliases | where expansion !~ '\^' | select name expansion | insert command { |row| ( $row.expansion | parse --regex '(?P<command>\w+).*' | get 0 | get command ) } | select name command
