@@ -47,6 +47,6 @@ def add [...args] {
   if ($args | is-empty) {
     git add -A :/
   } else {
-    git add $args
+    git add ...$args
   }
 }
