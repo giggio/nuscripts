@@ -5,6 +5,19 @@ if (which carapace | is-empty) {
 # carapace _carapace nushell
 # then adapt to this file
 
+mut bridges = []
+if $nu.os-info.family == unix {
+  $bridges = ($bridges | append 'bash')
+}
+if not (which inshellisense | is-empty) {
+  $bridges = ($bridges | append 'inshellisense')
+}
+if not ($bridges | is-empty) {
+  $env.CARAPACE_BRIDGES = ($bridges | str join ',')
+}
+
+# update after this line
+
 def --env get-env [name] { $env | get $name }
 def --env set-env [name, value] { load-env { $name: $value } }
 def --env unset-env [name] { hide-env $name }
