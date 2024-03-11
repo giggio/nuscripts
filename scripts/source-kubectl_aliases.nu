@@ -1,4 +1,4 @@
-if not (which kubecolor | is-empty) {
+if (which kubecolor | is-empty) {
   return
 }
 

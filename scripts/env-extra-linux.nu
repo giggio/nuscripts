@@ -19,7 +19,7 @@ if ($N_PREFIX | path type) == dir {
 }
 
 let DENO_INSTALL = $"($env.HOME)/.deno/bin"
-if not (which dvm | is-empty) or ($"($DENO_INSTALL)/bin/deno" | path exists) {
+if (which dvm | is-not-empty) or ($"($DENO_INSTALL)/bin/deno" | path exists) {
   if not ($DENO_INSTALL | path exists) {
     mkdir $DENO_INSTALL
   }

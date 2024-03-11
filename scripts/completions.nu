@@ -9,10 +9,10 @@ mut bridges = []
 if $nu.os-info.family == unix {
   $bridges = ($bridges | append 'bash')
 }
-if not (which inshellisense | is-empty) {
+if (which inshellisense | is-not-empty) {
   $bridges = ($bridges | append 'inshellisense')
 }
-if not ($bridges | is-empty) {
+if ($bridges | is-not-empty) {
   $env.CARAPACE_BRIDGES = ($bridges | str join ',')
 }
 

@@ -8,6 +8,6 @@ source alias-wsl.nu
 #   alias bat = batcat
 # }
 # because Ubuntu has bat set as batcat
-alias bat = ^(if (which ^bat | is-empty) and (not (which ^batcat | is-empty)) { (which ^batcat).path | get 0 } else { (which ^bat).path | get 0 })
+alias bat = ^(if (which ^bat | is-empty) and (which ^batcat | is-not-empty) { (which ^batcat).path | get 0 } else { (which ^bat).path | get 0 })
 
 alias nn = ^($env.HOME | path join bin n)

@@ -36,21 +36,21 @@ if ('~/.fzf' | path exists) {
   #   source ~/.fzf/shell/key-bindings.nu
   # }
 
-  if not (which fd | is-empty) {
+  if (which fd | is-not-empty) {
     $env.FZF_DEFAULT_COMMAND = "fd --type file --color=always --exclude .git"
     $env.FZF_DEFAULT_OPTS = "--ansi"
     $env.FZF_CTRL_T_COMMAND = $env.FZF_DEFAULT_COMMAND
   }
 }
 
-if not (which dotnet | is-empty) {
+if (which dotnet | is-not-empty) {
   let dotnetToolsPath = ($env.HOME | path join .dotnet tools)
   if (path get | find $dotnetToolsPath | is-empty) {
     std path add $dotnetToolsPath
   }
 }
 
-if not (which sccache | is-empty) {
+if (which sccache | is-not-empty) {
   $env.RUSTC_WRAPPER = (which sccache).path
 }
 
