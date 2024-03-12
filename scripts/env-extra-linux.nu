@@ -2,6 +2,7 @@ $env.RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep dock
 $env.WSL = (grep microsoft /proc/version -q | complete).exit_code == 0
 
 source env-wsl.nu
+source nix.nu
 
 std path add $"($env.HOME)/.local/bin"
 
