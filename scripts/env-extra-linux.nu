@@ -1,7 +1,7 @@
 $env.RUNNING_IN_CONTAINER = (('/.dockerenv' | path type) == 'file' or (grep docker /proc/1/cgroup -qa err> /dev/null | complete).exit_code == 0)
 $env.WSL = (grep microsoft /proc/version -q | complete).exit_code == 0
 
-source env-wsl.nu
+source (if $WSL { 'env-wsl.nu' } else { 'noop.nu' })
 source nix.nu
 
 std path add $"($env.HOME)/.local/bin"

@@ -845,6 +845,7 @@ $env.config = {
 
 # to update the above code go to (adapt the tag): https://github.com/nushell/nushell/blob/0.88.1/crates/nu-utils/src/sample_config/default_config.nu
 
+source environment.nu
 source env-extra.nu
 source config-extra.nu
 $env.config.color_config = $dark_theme

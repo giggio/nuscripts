@@ -1,7 +1,3 @@
-if not ($env | get -i WSL | default false) {
-  return
-}
-
 $env.COMSPEC = /mnt/c/Windows/System32/cmd.exe
 
 def win_path [--windows_format] {

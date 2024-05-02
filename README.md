@@ -12,6 +12,8 @@ git clone --recursive https://github.com/giggio/nuscripts.git <your directory>
 
 Set a symlink from `config.nu` and `env.nu` to the ones in your directory.
 
+Run `./setup.nu` to set the environment file.
+
 ## Completions
 
 Install [carapace-bin](https://github.com/rsteube/carapace-bin) and add

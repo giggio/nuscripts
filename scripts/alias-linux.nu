@@ -1,7 +1,4 @@
-
-# todo: does not work, $env is not a parse time constant
-# source (if ($env | get -i WSL | default false) { 'alias-wsl.nu' } else { 'noop.nu' })
-source alias-wsl.nu
+source (if $WSL { 'alias-wsl.nu' } else { 'noop.nu' })
 
 # aliases don't persist in conditionals: https://github.com/nushell/nushell/issues/5068
 # if ((which bat | is-empty) and (not (which batcat | is-empty))) {
