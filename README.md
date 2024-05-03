@@ -8,9 +8,15 @@ Install Nushell, then run:
 
 ```nushell
 git clone --recursive https://github.com/giggio/nuscripts.git <your directory>
+# or use: git clone --recursive git@github.com:giggio/nuscripts.git
 ```
 
-Set a symlink from `config.nu` and `env.nu` to the ones in your directory.
+Set a symlink from `config.nu` and `env.nu` to the directory where you cloned this repo. For example, using PowerShell in Windows, assuming the scripts are cloned at `C:\p\nuscripts`:
+
+```powershell
+New-Item -ItemType SymbolicLink -Path $env:APPDATA\nushell\env.nu -Value C:\p\nuscripts\env.nu -Force
+New-Item -ItemType SymbolicLink -Path $env:APPDATA\nushell\config.nu -Value C:\p\nuscripts\config.nu -Force
+```
 
 Run `./setup.nu` to set the environment file.
 
