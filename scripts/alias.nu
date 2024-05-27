@@ -19,7 +19,7 @@ alias grep = grep --color=auto
 alias fgrep = fgrep --color=auto
 alias egrep = egrep --color=auto
 # alias ll = if (which eza | is-empty) { ls -la } else { eza --long --group --all --all --group-directories-first }
-alias ll = eza --long --group --all --all --group-directories-first
+alias ll = eza --long --group --all --all --group-directories-first --hyperlink
 alias l = ls
 alias cls = clear
 alias istio = istioctl
@@ -50,3 +50,5 @@ def add [...args] {
     git add ...$args
   }
 }
+
+alias mg = kitty +kitten hyperlinked_grep --smart-case
