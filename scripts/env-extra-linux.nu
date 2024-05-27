@@ -13,10 +13,12 @@ if ($"($env.HOME)/.cargo/bin" | path type) == dir {
   std path add $"($env.HOME)/.cargo/bin"
 }
 
-let N_PREFIX = $env.HOME | path join .n
-if ($N_PREFIX | path type) == dir {
-  std path add $"($N_PREFIX)/bin"
-  $env.N_PREFIX = $N_PREFIX
+if ($env | get -i N_PREFIX | is-empty) {
+  let N_PREFIX = $env.HOME | path join .n
+  if ($N_PREFIX | path type) == dir {
+    std path add $"($N_PREFIX)/bin"
+    $env.N_PREFIX = $N_PREFIX
+  }
 }
 
 let DENO_INSTALL = $"($env.HOME)/.deno/bin"
