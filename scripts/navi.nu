@@ -27,26 +27,11 @@ def _navi_widget [--run, --display] {
   if $result == "" {
     return
   }
-  let tmpfile = mktemp --tmpdir --suffix .nu
-  try {
-    $result | save --force $tmpfile
-    if $run {
-      ^$navi_command $tmpfile
-      history insert $"^($navi_command) -c '($result)'"
-      commandline -r ''
-    } else if $display {
-      commandline -r $"^($navi_command) -c '($result)'"
-    } else {
-      commandline -r $result
-      # we can't do that, cheats are written in bash:
-      # history insert $result
-      # nu $tmpfile
-    }
-  } catch { |e|
-    use std log
-    log error $"Command failed: ($e)"
+  if $display {
+    commandline edit -r $"^($navi_command) -c '($result)'"
+  } else {
+    commandline edit -r $result
   }
-  rm $tmpfile
   ignore
 }
 
@@ -65,17 +50,6 @@ $env.config.keybindings = ($env.config.keybindings | append {
   name: navi
   modifier: control
   keycode: char_h
-  mode: [emacs vi_normal vi_insert]
-  event: {
-    send: ExecuteHostCommand
-    cmd: "_navi_widget --run"
-  }
-})
-
-$env.config.keybindings = ($env.config.keybindings | append {
-  name: navi
-  modifier: control
-  keycode: char_f
   mode: [emacs vi_normal vi_insert]
   event: {
     send: ExecuteHostCommand
