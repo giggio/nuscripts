@@ -52,3 +52,5 @@ def add [...args] {
 }
 
 alias mg = kitty +kitten hyperlinked_grep --smart-case
+
+alias hm = home-manager --flake ~/.dotfiles/config/home-manager --impure
