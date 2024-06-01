@@ -2,6 +2,12 @@ if (which navi | is-empty) {
   return
 }
 
+if not ((navi info config-path) | path exists) {
+  if not ((navi info config-path) | path dirname | path exists) {
+    mkdir (navi info config-path | path dirname)
+  }
+  touch (navi info config-path)
+}
 let navi_command = open (navi info config-path) | get -i 'shell' | default { command: null } | get -i command | default 'bash'
 
 # use dotfiles cheats if it exists
