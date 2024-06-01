@@ -10,7 +10,7 @@ $env.config.cursor_shape.vi_insert = line
 $env.config.cursor_shape.vi_normal = block
 $env.config.buffer_editor = vim
 $env.config.edit_mode = vi
-$env.config.shell_integration = true
+$env.config.shell_integration.osc9_9 = true
 $env.config.highlight_resolved_externals = true
 
 source (if $nu.os-info.family == unix { 'config-extra-linux.nu' } else { 'config-extra-windows.nu' })

@@ -1,6 +1,6 @@
 # Nushell Config File
 #
-# version = "0.91.0"
+# version = "0.94.0"
 
 # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
@@ -69,6 +69,7 @@ let dark_theme = {
     shape_table: blue_bold
     shape_variable: purple
     shape_vardecl: purple
+    shape_raw_string: light_purple
 }
 
 let light_theme = {
@@ -134,6 +135,7 @@ let light_theme = {
     shape_table: blue_bold
     shape_variable: purple
     shape_vardecl: purple
+    shape_raw_string: light_purple
 }
 
 # External completer example
@@ -234,12 +236,55 @@ $env.config = {
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
     edit_mode: emacs # emacs, vi
-    shell_integration: false # enables terminal shell integration. Off by default, as some terminals have issues with this.
+    shell_integration: {
+        # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
+        osc2: true
+        # osc7 is a way to communicate the path to the terminal, this is helpful for spawning new tabs in the same directory
+        osc7: true
+        # osc8 is also implemented as the deprecated setting ls.show_clickable_links, it shows clickable links in ls output if your terminal supports it. show_clickable_links is deprecated in favor of osc8
+        osc8: true
+        # osc9_9 is from ConEmu and is starting to get wider support. It's similar to osc7 in that it communicates the path to the terminal
+        osc9_9: false
+        # osc133 is several escapes invented by Final Term which include the supported ones below.
+        # 133;A - Mark prompt start
+        # 133;B - Mark prompt end
+        # 133;C - Mark pre-execution
+        # 133;D;exit - Mark execution finished with exit code
+        # This is used to enable terminals to know where the prompt is, the command is, where the command finishes, and where the output of the command is
+        osc133: true
+        # osc633 is closely related to osc133 but only exists in visual studio code (vscode) and supports their shell integration features
+        # 633;A - Mark prompt start
+        # 633;B - Mark prompt end
+        # 633;C - Mark pre-execution
+        # 633;D;exit - Mark execution finished with exit code
+        # 633;E - NOT IMPLEMENTED - Explicitly set the command line with an optional nonce
+        # 633;P;Cwd=<path> - Mark the current working directory and communicate it to the terminal
+        # and also helps with the run recent menu in vscode
+        osc633: true
+        # reset_application_mode is escape \x1b[?1l and was added to help ssh work better
+        reset_application_mode: true
+    }
     render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
     use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
     highlight_resolved_externals: false # true enables highlighting of external commands in the repl resolved by which.
+    recursion_limit: 50 # the maximum number of times nushell allows recursion before stopping it
 
     plugins: {} # Per-plugin configuration. See https://www.nushell.sh/contributor-book/plugins.html#configuration.
+
+    plugin_gc: {
+        # Configuration for plugin garbage collection
+        default: {
+            enabled: true # true to enable stopping of inactive plugins
+            stop_after: 10sec # how long to wait after a plugin is inactive to stop it
+        }
+        plugins: {
+            # alternate configuration for specific plugins, by name, for example:
+            #
+            # gstat: {
+            #     enabled: false
+            # }
+        }
+    }
 
     hooks: {
         pre_prompt: [{ null }] # run before the prompt is shown
@@ -809,12 +854,20 @@ $env.config = {
             mode: emacs
             event: { edit: capitalizechar }
         }
+        # The following bindings with `*system` events require that Nushell has
+        # been compiled with the `system-clipboard` feature.
+        # This should be the case for Windows, macOS, and most Linux distributions
+        # Not available for example on Android (termux)
+        # If you want to use the system clipboard for visual selection or to
+        # paste directly, uncomment the respective lines and replace the version
+        # using the internal clipboard.
         {
             name: copy_selection
             modifier: control_shift
             keycode: char_c
             mode: emacs
             event: { edit: copyselection }
+            # event: { edit: copyselectionsystem }
         }
         {
             name: cut_selection
@@ -822,20 +875,21 @@ $env.config = {
             keycode: char_x
             mode: emacs
             event: { edit: cutselection }
+            # event: { edit: cutselectionsystem }
         }
+        # {
+        #     name: paste_system
+        #     modifier: control_shift
+        #     keycode: char_v
+        #     mode: emacs
+        #     event: { edit: pastesystem }
+        # }
         {
             name: select_all
             modifier: control_shift
             keycode: char_a
             mode: emacs
             event: { edit: selectall }
-        }
-        {
-            name: paste
-            modifier: control_shift
-            keycode: char_v
-            mode: emacs
-            event: { edit: pastecutbufferbefore }
         }
     ]
 }
