@@ -53,9 +53,3 @@ if (which dotnet | is-not-empty) {
 if (which sccache | is-not-empty) {
   $env.RUSTC_WRAPPER = (which sccache).path
 }
-
-# I was considering using githhoks in templating mode, but I think I prefer manual mode
-# I will leave this here in case I change my mind
-# if ('~/.gittemplate' | path exists) and ((git config githooks.runner | envsubst) | path exists) {
-#   $env.GIT_TEMPLATE_DIR = $"($env.HOME)/.gittemplate"
-# }
