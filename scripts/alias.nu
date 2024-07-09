@@ -14,7 +14,6 @@ alias branch = git branch
 alias tag = git tag
 alias up = git up
 alias sync = git sync
-alias ccat = pygmentize -g -O style=vs -f console16m
 alias grep = grep --color=auto
 alias fgrep = fgrep --color=auto
 alias egrep = egrep --color=auto
