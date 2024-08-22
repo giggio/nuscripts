@@ -6,10 +6,10 @@ $env.config.history = {
     file_format: "sqlite"
     isolation: true
 }
-$env.config.cursor_shape.vi_insert = line
-$env.config.cursor_shape.vi_normal = block
-$env.config.buffer_editor = vim
-$env.config.edit_mode = vi
+$env.config.cursor_shape.vi_insert = "line"
+$env.config.cursor_shape.vi_normal = "block"
+$env.config.buffer_editor = "vim"
+$env.config.edit_mode = "vi"
 $env.config.shell_integration.osc9_9 = true
 $env.config.highlight_resolved_externals = true
 
