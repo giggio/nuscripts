@@ -6,8 +6,8 @@ source nix.nu
 
 std path add $"($env.HOME)/.local/bin"
 
-$env.TMP = /tmp
-$env.TEMP = /tmp
+$env.TMP = "/tmp"
+$env.TEMP = "/tmp"
 
 if ($"($env.HOME)/.cargo/bin" | path exists) and ($"($env.HOME)/.cargo/bin" | path type) == dir {
   std path add $"($env.HOME)/.cargo/bin"

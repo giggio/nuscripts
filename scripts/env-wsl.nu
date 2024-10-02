@@ -1,4 +1,4 @@
-$env.COMSPEC = /mnt/c/Windows/System32/cmd.exe
+$env.COMSPEC = "/mnt/c/Windows/System32/cmd.exe"
 
 def win_path [--windows_format] {
   cd /mnt/c
