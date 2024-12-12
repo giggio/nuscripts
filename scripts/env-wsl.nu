@@ -26,6 +26,3 @@ def remove_win_from_path [] {
   }
   return $path
 }
-
-$env.PATH_WITH_WINDOWS = $env.PATH
-$env.PATH = (remove_win_from_path)

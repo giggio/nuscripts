@@ -1,4 +1,4 @@
-$env.STARSHIP_CONFIG = ($nu.config-path | path dirname | path join starship.toml)
+$env.STARSHIP_CONFIG = ($NUSHELL_CONFIG_DIR | path join starship.toml)
 $env.config.show_banner = false
 $env.config.history = {
     max_size: 100_000

@@ -1,9 +1,8 @@
-let bashscripts = ($nu.config-path | path dirname | path join .. bashscripts | path expand)
+let bashscripts = ($NUSHELL_CONFIG_DIR | path join .. bashscripts | path expand)
 if ($bashscripts | path exists) {
   let bashrcwsl = ($bashscripts | path join "bashrc-wsl.bash")
   if ($bashrcwsl | path exists) {
     do {
-      $env.PATH = $env.PATH_WITH_WINDOWS
       ^$bashrcwsl
     }
   }

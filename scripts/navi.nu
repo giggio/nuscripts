@@ -11,7 +11,7 @@ if not ((navi info config-path) | path exists) {
 let navi_command = open (navi info config-path) | get -i 'shell' | default { command: null } | get -i command | default 'bash'
 
 # use dotfiles cheats if it exists
-let cheats_dir = ($nu.config-path | path dirname | path join .. home-manager cheats | path expand)
+let cheats_dir = ($NUSHELL_CONFIG_DIR | path join .. home-manager cheats | path expand)
 if ($cheats_dir | path exists) {
   let os = if $nu.os-info.family == unix { 'linux' } else { 'windows' }
   $env.NAVI_PATH = $"($cheats_dir)/dist/common/(char esep)($cheats_dir)/dist/nushell/(char esep)($cheats_dir)/dist/($os)/common/(char esep)($cheats_dir)/dist/($os)/nushell/"

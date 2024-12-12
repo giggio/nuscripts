@@ -105,11 +105,11 @@ $env.NU_PLUGIN_DIRS = [
 
 # to update the above code go to (adapt the tag): https://github.com/nushell/nushell/blob/0.88.1/crates/nu-utils/src/sample_config/default_env.nu
 
+source scripts/dynamic/environment.nu
 use std
-let scripts_path = $nu.config-path | path dirname | path join scripts
+let scripts_path = $NUSHELL_CONFIG_DIR | path join scripts
 $env.NU_LIB_DIRS = [
   $scripts_path
   ($scripts_path | path join dynamic)
-  ($nu.config-path | path dirname | path join lib)
+  ($NUSHELL_CONFIG_DIR | path join lib)
 ]
-source scripts/dynamic/environment.nu

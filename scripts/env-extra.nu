@@ -1,10 +1,7 @@
 use std
 
-let configPath = $nu.config-path | path dirname
-let scriptsPath = $configPath | path join scripts
-
 $env.NU_PLUGIN_DIRS = [
-  ($configPath | path join plugins)
+  ($NUSHELL_CONFIG_DIR | path join plugins)
 ]
 
 source functions.nu
