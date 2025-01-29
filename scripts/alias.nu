@@ -41,8 +41,7 @@ def pushsync [] {
   git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)
 }
 
-def add [...args] {
-  # flags don't work. See: https://github.com/nushell/nushell/issues/3276
+def --wrapped add [...args] {
   if ($args | is-empty) {
     git add -A :/
   } else {
