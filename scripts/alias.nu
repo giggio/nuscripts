@@ -50,3 +50,11 @@ def --wrapped add [...args] {
 }
 
 alias mg = kitty +kitten hyperlinked_grep --smart-case
+
+def --wrapped uptime [...args] {
+  if (which ^uptime | is-empty) {
+    (sys host).uptime
+  } else {
+    ^uptime ...$args
+  }
+}
