@@ -14,10 +14,10 @@ if ($env.binDir | path type) == dir {
 hide-env binDir
 
 if ($env | get -i EDITOR) == null {
-  $env.EDITOR = "vim"
+  $env.EDITOR = "nvim"
 }
 if ($env | get -i VISUAL) == null {
-  $env.VISUAL = "vim"
+  $env.VISUAL = "nvim"
 }
 
 if ('~/.kube' | path exists) {
