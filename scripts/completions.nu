@@ -29,9 +29,9 @@ let carapace_completer = {|spans|
   # overwrite
   let spans = (if $expanded_alias != null  {
     # put the first word of the expanded alias first in the span
-    $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
+    $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1 | str replace --regex  '\.exe$' '')
   } else {
-    $spans
+    $spans | skip 1 | prepend ($spans.0 | str replace --regex  '\.exe$' '')
   })
 
   carapace $spans.0 nushell ...$spans
@@ -42,6 +42,7 @@ mut current = (($env | default {} config).config | default {} completions)
 $current.completions = ($current.completions | default {} external)
 $current.completions.external = ($current.completions.external
 | default true enable
-| default $carapace_completer completer)
+| default { $carapace_completer } completer)
 
 $env.config = $current
+
