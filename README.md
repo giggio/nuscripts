@@ -1,5 +1,7 @@
 # Giovanni Bassi's Nushell files
 
+Main repo: [codeberg.org/giggio/nuscripts](https://codeberg.org/giggio/nuscripts)
+
 These are my personal Nushell files.
 
 ## Installation instructions
@@ -7,8 +9,8 @@ These are my personal Nushell files.
 Install Nushell, then run:
 
 ```nushell
-git clone --recursive https://github.com/giggio/nuscripts.git <your directory>
-# or use: git clone --recursive git@github.com:giggio/nuscripts.git
+git clone --recursive https://codeberg.org/giggio/nuscripts.git <your directory>
+# or use: git clone --recursive git@codeberg.org:giggio/nuscripts.git
 ```
 
 Set a symlink from the default nushell config directory to the directory where
@@ -38,16 +40,16 @@ Install:
 
 ## Contributing
 
-Questions, comments, bug reports, and pull requests are all welcome. Submit them at
-[the project on GitHub](https://github.com/giggio/nuscripts).
+Questions, comments, bug reports, and pull requests are all welcome.  Submit them at
+[the project on Codeberg](https://codeberg.com/giggio/nuscripts/).
 
-Bug reports that include steps-to-reproduce (including code) are the
-best. Even better, make them in the form of pull requests.
+Bug reports that include steps-to-reproduce (including code) are the best. Even better, make them in the form of pull
+requests. Pull requests on Github will probably be ignored, so avoid them.
 
 ## Author
 
-[Giovanni Bassi](https://twitter.com/giovannibassi).
+[Giovanni Bassi](https://links.giggio.net/bio)
 
 ## License
 
-Licensed under the MIT License.
+Licensed under the MIT license.
