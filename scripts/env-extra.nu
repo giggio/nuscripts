@@ -13,10 +13,10 @@ if ($env.binDir | path type) == dir {
 }
 hide-env binDir
 
-if ($env | get -i EDITOR) == null {
+if ($env | get -o EDITOR) == null {
   $env.EDITOR = "nvim"
 }
-if ($env | get -i VISUAL) == null {
+if ($env | get -o VISUAL) == null {
   $env.VISUAL = "nvim"
 }
 

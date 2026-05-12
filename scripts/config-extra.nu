@@ -21,6 +21,6 @@ source zoxide.nu
 source history-command.nu
 source completions.nu
 source source-kubecolor_aliases.nu
-source ./kubectl-aliases/.kubectl_aliases.nu
+source ../lib/kubectl-aliases/.kubectl_aliases.nu
 source github-copilot-cli.nu
 source navi.nu

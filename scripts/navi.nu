@@ -8,7 +8,7 @@ if not ((navi info config-path) | path exists) {
   }
   touch (navi info config-path)
 }
-let navi_command = open (navi info config-path) | get -i 'shell' | default { command: null } | get -i command | default 'bash'
+let navi_command = open (navi info config-path) | get -o 'shell' | default { command: null } | get -o command | default 'bash'
 
 let cheats_dir = (if $nu.os-info.family == unix {
   # use dotfiles cheats if it exists
@@ -25,7 +25,7 @@ if ($cheats_dir | path exists) {
 def _navi_widget [--run, --display] {
   let input = commandline
   let os = if $nu.os-info.family == unix { 'linux' } else { 'windows' }
-  if ($env | get NAVI_ORIGINAL_PATH -i | is-empty) {
+  if ($env | get NAVI_ORIGINAL_PATH -o | is-empty) {
     $env.NAVI_PATH = if $run or $display {
       $"($cheats_dir)/dist/common/(char esep)($cheats_dir)/dist/bash/(char esep)($cheats_dir)/dist/($os)/common/(char esep)($cheats_dir)/dist/($os)/bash/"
     } else {
