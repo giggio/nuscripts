@@ -58,7 +58,7 @@ $env.config.keybindings = ($env.config.keybindings | append {
 })
 
 $env.config.keybindings = ($env.config.keybindings | append {
-  name: navi
+  name: navi_display
   modifier: control
   keycode: char_h
   mode: [emacs vi_normal vi_insert]
